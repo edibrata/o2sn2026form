@@ -6,7 +6,7 @@
     <title>Pendaftaran O2SN Sukaresmi 2026</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/edibrata/image/main/Logo%20O2SN%202026-1.png">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/edibrata/image/main/Logo%20O2SN%202026-2.png">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
@@ -123,7 +123,7 @@
             <div class="flex justify-between items-center h-14 md:h-16">
                 <!-- Branding area -->
                 <div class="flex items-center gap-2 md:gap-3">
-                    <img src="https://raw.githubusercontent.com/edibrata/image/main/Logo%20O2SN%202026-1.png" alt="Logo O2SN" class="h-8 md:h-10 w-auto rounded-sm">
+                    <img src="https://raw.githubusercontent.com/edibrata/image/main/Logo%20O2SN%202026-2.png" alt="Logo O2SN" class="h-8 md:h-10 w-auto rounded-sm">
                     <div class="flex flex-col">
                         <span class="font-bold text-base md:text-lg tracking-tight text-slate-900 leading-none">O2SN <span class="text-sky-600 uppercase">Sukaresmi</span></span>
                         <span class="text-[7px] md:text-[8px] font-black text-slate-400 uppercase tracking-widest mt-0.5 leading-none">Developed By Edi Brata</span>
@@ -164,7 +164,7 @@
         <section id="beranda" class="tab-content active space-y-6 fade-in">
             <div class="bg-white border border-slate-200 rounded-lg p-8 md:p-12 overflow-hidden relative shadow-sm text-center md:text-left">
                 <div class="flex flex-col md:flex-row items-center gap-8 relative z-10 text-center md:text-left">
-                    <img src="https://raw.githubusercontent.com/edibrata/image/main/Logo%20O2SN%202026-1.png" alt="Logo O2SN" class="w-32 md:w-40 h-auto">
+                    <img src="https://raw.githubusercontent.com/edibrata/image/main/Logo%20O2SN%202026-2.png" alt="Logo O2SN" class="w-32 md:w-40 h-auto">
                     <div class="flex-1">
                         <p class="text-sm text-slate-600 mb-3 font-medium leading-tight">Selamat datang di portal pendaftaran atlet O2SN tingkat Kecamatan Sukaresmi Tahun 2026.</p>
                         
@@ -304,7 +304,7 @@
         <section id="data" class="tab-content text-slate-800">
             <div id="adminLoginArea" class="max-w-md mx-auto py-10">
                 <div class="bg-white p-8 rounded border border-slate-200 text-center shadow-lg">
-                    <img src="https://raw.githubusercontent.com/edibrata/image/main/Logo%20O2SN%202026-1.png" alt="Logo O2SN" class="h-16 w-auto mx-auto mb-6">
+                    <img src="https://raw.githubusercontent.com/edibrata/image/main/Logo%20O2SN%202026-2.png" alt="Logo O2SN" class="h-16 w-auto mx-auto mb-6">
                     <h2 class="text-xl font-bold mb-6 uppercase tracking-tight text-slate-900 leading-none">Administrator O2SN</h2>
                     <div class="relative mb-4">
                         <input type="password" id="adminPass" class="w-full px-4 py-3 pr-12 rounded border border-slate-300 outline-none focus:border-sky-500 text-center font-bold tracking-widest" placeholder="KATA SANDI">
@@ -379,7 +379,7 @@
     <footer class="w-full border-t border-slate-200 mt-auto py-10 bg-white">
         <div class="max-w-6xl mx-auto px-4 flex flex-col items-center justify-center gap-4">
             <div class="flex items-center gap-3 opacity-60 grayscale hover:grayscale-0 transition-all cursor-default group">
-                <img src="https://raw.githubusercontent.com/edibrata/image/main/Logo%20O2SN%202026-1.png" alt="Logo O2SN" class="h-6 md:h-8 w-auto rounded-sm group-hover:scale-110 transition-transform">
+                <img src="https://raw.githubusercontent.com/edibrata/image/main/Logo%20O2SN%202026-2.png" alt="Logo O2SN" class="h-6 md:h-8 w-auto rounded-sm group-hover:scale-110 transition-transform">
                 <span class="text-[10px] md:text-[11px] font-black text-slate-400 uppercase tracking-[0.2em]">O2SN Sukaresmi 2026</span>
             </div>
             <div class="text-[11px] md:text-[12px] font-black text-sky-400 uppercase tracking-[0.2em] hover:text-sky-600 transition-colors cursor-default">
@@ -622,10 +622,6 @@
             updateAdminTable();
         }
 
-        /**
-         * Fungsi Hapus yang telah diperbaiki
-         * Menghapus hanya 1 data atlet tanpa menghapus seluruh sekolah.
-         */
         window.deleteEntry = async function(docId, caborId, athleteIdx) {
             if (!confirm("Hapus data atlet ini?")) return;
             
@@ -633,7 +629,6 @@
                 const match = window.submissions.find(s => s.id === docId);
                 if (!match) return;
 
-                // Hitung total atlet yang tersisa di seluruh dokumen
                 let totalAthletesCount = 0;
                 Object.keys(LOMBA_MAP).forEach(key => {
                     for(let i=1; i<=LOMBA_MAP[key].count; i++) {
@@ -641,12 +636,10 @@
                     }
                 });
 
-                // Jika ini atlet terakhir, hapus seluruh dokumen
                 if (totalAthletesCount <= 1) {
                     await window.firestoreTools.deleteDoc(window.firestoreTools.doc(window.db, 'artifacts', window.customAppId, 'public', 'data', 'pendaftar', docId));
                     showModal("BERHASIL", "Atlet terakhir dihapus. Data sekolah juga telah dihapus dari sistem.", "success");
                 } else {
-                    // Jika masih ada atlet lain, cukup hapus (kosongkan) field atlet ini saja
                     const updateObj = {};
                     const prefix = `${caborId}_`;
                     updateObj[`${prefix}nama_${athleteIdx}`] = "";
@@ -685,7 +678,6 @@
             
             window.submissions.forEach(sub => {
                 Object.keys(LOMBA_MAP).forEach(key => {
-                    // Periksa apakah ada atlet di cabor ini
                     let hasAthleteInCabor = false;
                     for(let k=1; k<=LOMBA_MAP[key].count; k++) { if (sub[`${key}_nama_${k}`]) hasAthleteInCabor = true; }
                     
@@ -717,7 +709,7 @@
                                 waktu_daftar: formattedTime, 
                                 nama_sekolah: sekolah, 
                                 lomba_id: key, 
-                                athleteIdx: i, // Menandai nomor urut atlet di cabor tersebut
+                                athleteIdx: i,
                                 lomba_name: lomba, 
                                 nama_peserta: name, 
                                 nisn: nisn, 
@@ -774,7 +766,6 @@
                             <button onclick="editEntry('${r.id}')" class="p-1.5 bg-sky-50 text-sky-600 rounded hover:bg-sky-600 hover:text-white transition-all shadow-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
                             </button>
-                            <!-- Tombol Hapus memanggil fungsi baru dengan parameter lengkap -->
                             <button onclick="deleteEntry('${r.id}', '${r.lomba_id}', ${r.athleteIdx})" class="p-1.5 bg-rose-50 text-rose-600 rounded hover:bg-rose-600 hover:text-white transition-all shadow-sm">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
                             </button>
