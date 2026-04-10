@@ -776,6 +776,19 @@ Silakan gunakan kode tersebut di portal pendaftaran pada menu REVISI. Terima kas
         }
 
         /**
+         * Get formatted timestamp for filenames (YYYYMMDD HH.SS)
+         */
+        function getFileTimestamp() {
+            const n = new Date();
+            const y = n.getFullYear();
+            const m = String(n.getMonth() + 1).padStart(2, '0');
+            const d = String(n.getDate()).padStart(2, '0');
+            const h = String(n.getHours()).padStart(2, '0');
+            const s = String(n.getSeconds()).padStart(2, '0');
+            return `${y}${m}${d} ${h}.${s}`;
+        }
+
+        /**
          * Download PDF from Admin Table (Generates PDF using the original data)
          */
         window.downloadAdminPDF = function(docId) {
@@ -915,7 +928,7 @@ Silakan gunakan kode tersebut di portal pendaftaran pada menu REVISI. Terima kas
             const overallData = [];
             window.submissions.forEach(sub => {
                 Object.keys(LOMBA_MAP).forEach(key => {
-                    if (sub[`${key}_nama_1`] || sub[`${key}_nama_2`] || sub[`${key}_nama_3`] || sub[`${key}_nama_4`]) {
+                    if (sub[`${key}_nama_1`] || sub[`${key}_nama_2`] || sub[`${key}_nama_3`] || sub[`${key}_nama_4` ]) {
                         for(let i=1; i<=LOMBA_MAP[key].count; i++) {
                             const pName = sub[`${key}_nama_${i}`];
                             if (!pName) continue;
@@ -932,7 +945,8 @@ Silakan gunakan kode tersebut di portal pendaftaran pada menu REVISI. Terima kas
                 });
             });
             XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(overallData), "ATLET KESELURUHAN");
-            XLSX.writeFile(wb, `Data_Atlet_O2SN_Sukaresmi.xlsx`);
+            const ts = getFileTimestamp();
+            XLSX.writeFile(wb, `Edi Brata Data Pendaftaran O2SN ${ts}.xlsx`);
         }
 
         function switchTab(tabId) {
@@ -1070,9 +1084,6 @@ Silakan gunakan kode tersebut di portal pendaftaran pada menu REVISI. Terima kas
             const schoolName = data.nama_sekolah || "-";
             const revToken = data.revision_token || "SYSTEM-GEN";
             
-            const now = new Date();
-            const timestamp = `${now.getFullYear()}${String(now.getMonth()+1).padStart(2,'0')}${String(now.getDate()).padStart(2,'0')} ${now.getHours()}.${now.getMinutes()}`;
-
             doc.setFontSize(18);
             doc.setTextColor(14, 165, 233);
             doc.setFont("helvetica", "bold");
@@ -1134,7 +1145,9 @@ Silakan gunakan kode tersebut di portal pendaftaran pada menu REVISI. Terima kas
             doc.setFont("helvetica", "italic");
             doc.text(`Dokumen ini adalah bukti sah pendaftaran atlet O2SN Sukaresmi 2026.`, 105, finalY, { align: "center" });
             
-            const fileName = `Bukti_O2SN_${schoolName}_${timestamp}.pdf`;
+            const ts = getFileTimestamp();
+            const prefix = isRevision ? "Edi Brata Bukti Revisi Pendaftaran O2SN" : "Edi Brata Bukti Pendaftaran O2SN";
+            const fileName = `${prefix} ${schoolName} ${ts}.pdf`;
             doc.save(fileName);
         }
 
