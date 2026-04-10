@@ -394,7 +394,7 @@
         <div class="bg-white w-full max-w-sm rounded-lg shadow-2xl p-6 text-center transform transition-all">
             <div id="modalIcon" class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl"></div>
             <h3 id="modalTitle" class="text-lg font-black uppercase tracking-tight text-slate-900 mb-2 leading-none"></h3>
-            <p id="modalMessage" class="text-sm text-slate-500 font-medium mb-6 leading-relaxed"></p>
+            <p id="modalMessage" class="text-sm text-slate-500 font-medium mb-6 leading-relaxed whitespace-pre-line"></p>
             <button onclick="closeModal()" class="w-full py-3 bg-slate-900 text-white rounded font-bold text-xs uppercase tracking-widest hover:bg-black transition-all">Tutup</button>
         </div>
     </div>
@@ -516,7 +516,7 @@
                         ${days} <span class="text-[10px] md:text-[12px] opacity-60 mr-1.5">HARI</span> 
                         ${hours} <span class="text-[10px] md:text-[12px] opacity-60 mr-1.5">JAM</span> 
                         ${minutes} <span class="text-[10px] md:text-[12px] opacity-60 mr-1.5">MENIT</span> 
-                        ${seconds} <span class="text-[10px] md:text-[12px] opacity-60">DETIK</span>
+                        ${seconds} <span class="text-[10px] md:text thin-12px opacity-60">DETIK</span>
                     </div>
                 `;
             } else {
@@ -568,15 +568,22 @@
                 document.getElementById('tokenModal').classList.add('hidden');
                 showModal("AKSES DIBUKA", `Token valid. Data ${pendingRevisionData.nama_sekolah} siap untuk direvisi.`, "success");
             } else {
-                showModal("TOKEN SALAH", "Kode token yang Anda masukkan tidak valid. Silakan hubungi panitia untuk mendapatkan kode.", "error");
+                const customMsg = `Token O2SN tidak valid atau sudah kedaluwarsa. 
+
+Admin telah melakukan reset keamanan. 
+
+Silakan klik tombol di bawah untuk meminta kode token terbaru via WhatsApp.`;
+                showModal("TOKEN TIDAK VALID", customMsg, "error");
             }
         }
 
         window.requestTokenWA = function() {
             const school = document.getElementById('tokenTargetSchool').innerText;
-            const message = `Mohon dikirim kode token revisi data pendaftaran O2SN ${school}.
+            const message = `Yth. Admin O2SN, 
 
-Terima Kasih.`;
+Kode token pendaftaran ${school} tidak bisa digunakan. Mohon kirimkan kode token terbaru. 
+
+Terima kasih.`;
             const encoded = encodeURIComponent(message);
             window.open(`https://wa.me/${ADMIN_WA}?text=${encoded}`, '_blank');
         }
@@ -766,18 +773,12 @@ Silakan gunakan kode tersebut di portal pendaftaran pada menu REVISI. Terima kas
             window.open(`https://wa.me/${finalPhone}?text=${encodeURIComponent(message)}`, '_blank');
         }
 
-        /**
-         * Sanitize phone number to international format (62...)
-         */
         function getCleanWA(phone) {
             let clean = phone.replace(/[^0-9]/g, '');
             if (clean.startsWith('0')) clean = '62' + clean.substring(1);
             return clean;
         }
 
-        /**
-         * Get formatted timestamp for filenames (YYYYMMDD HH.SS)
-         */
         function getFileTimestamp() {
             const n = new Date();
             const y = n.getFullYear();
@@ -788,16 +789,30 @@ Silakan gunakan kode tersebut di portal pendaftaran pada menu REVISI. Terima kas
             return `${y}${m}${d} ${h}.${s}`;
         }
 
-        /**
-         * Download PDF from Admin Table (Generates PDF using the original data)
-         */
         window.downloadAdminPDF = function(docId) {
             const entry = window.submissions.find(s => s.id === docId);
             if (entry) {
-                // generateRegistrationPDF(data, regId, isRevision)
                 generateRegistrationPDF(entry, entry.id, true);
             } else {
                 showModal("ERROR", "Data pendaftaran tidak ditemukan.", "error");
+            }
+        }
+
+        window.resetRevisionToken = async function(docId) {
+            const entry = window.submissions.find(s => s.id === docId);
+            if (!entry) return;
+            
+            if (!confirm(`Generate ulang token revisi untuk sekolah ${entry.nama_sekolah}? Token lama tidak akan bisa digunakan lagi.`)) return;
+            
+            try {
+                const newToken = generateToken();
+                await window.firestoreTools.updateDoc(window.firestoreTools.doc(window.db, 'artifacts', window.customAppId, 'public', 'data', 'pendaftar', docId), {
+                    revision_token: newToken
+                });
+                
+                showModal("TOKEN DIRESET", `Token baru berhasil digenerate: ${newToken}\n\nBerikan kode ini kepada pembimbing sekolah terkait.`, "success");
+            } catch (e) {
+                showModal("ERROR", e.message, "error");
             }
         }
 
@@ -909,6 +924,9 @@ Silakan gunakan kode tersebut di portal pendaftaran pada menu REVISI. Terima kas
                         <div class="flex items-center justify-center gap-1.5">
                             <button onclick="downloadAdminPDF('${r.id}')" class="p-1.5 bg-indigo-50 text-indigo-600 rounded hover:bg-indigo-600 hover:text-white transition-all shadow-sm" title="Unduh PDF Bukti">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17h6" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 13h6" /></svg>
+                            </button>
+                            <button onclick="resetRevisionToken('${r.id}')" class="p-1.5 bg-amber-50 text-amber-600 rounded hover:bg-amber-600 hover:text-white transition-all shadow-sm" title="Reset Token">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
                             </button>
                             <button onclick="editEntry('${r.id}')" class="p-1.5 bg-sky-50 text-sky-600 rounded hover:bg-sky-600 hover:text-white transition-all shadow-sm" title="Edit Data">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" /></svg>
