@@ -168,7 +168,7 @@
                     <div class="flex-1">
                         <p class="text-sm text-slate-600 mb-3 font-medium leading-tight">Selamat datang di portal pendaftaran atlet O2SN tingkat Kecamatan Sukaresmi Tahun 2026.</p>
                         
-                        <p class="text-sm text-slate-500 mb-3 font-medium leading-tight text-slate-500">Batas akhir pendaftaran hingga Kamis, 7 Mei 2026 pukul 20.00 WIB.</p>
+                        <p class="text-sm text-slate-500 mb-3 font-medium leading-tight text-slate-500">Batas akhir pendaftaran hingga Rabu, 6 Mei 2026 pukul 20.00 WIB.</p>
                         
                         <div id="deadlineBanner" class="hidden block text-center md:text-left transition-all mb-3">
                             <div id="deadlineText" class="text-[10px] md:text-xs font-black uppercase tracking-widest text-sky-600 leading-tight"></div>
@@ -283,7 +283,7 @@
 
                         <div class="flex justify-between mt-10 pt-6 border-t border-slate-100 gap-4">
                             <button type="button" id="prevBtn" onclick="moveStep(-1)" class="px-8 py-3 rounded border border-slate-200 font-bold text-slate-400 bg-white invisible text-xs uppercase tracking-widest transition-all">Kembali</button>
-                            <button type="button" id="nextBtn" onclick="moveStep(1)" class="px-12 py-3 gradient-bg text-white font-bold rounded shadow-md text-xs uppercase tracking-widest transition-all">Selanjutnya</button>
+                            <button type="button" id="nextBtn" onclick="moveStep(1)" class="px-12 py-3 gradient-bg text-white font-bold rounded shadow-md text-xs uppercase tracking-widest transition-all">Simpan Data Atlet</button>
                         </div>
                     </form>
                 </div>
@@ -292,7 +292,7 @@
             <div id="formClosedContainer" class="hidden max-w-2xl mx-auto py-12 px-4 text-center">
                 <div class="bg-white p-10 rounded-2xl border border-slate-200 shadow-xl space-y-6 text-slate-800">
                     <div class="w-20 h-20 bg-rose-50 text-rose-500 rounded-full flex items-center justify-center mx-auto text-4xl shadow-sm border border-rose-100">🕒</div>
-                    <p class="text-slate-700 font-medium text-sm leading-relaxed">Batas akhir pendaftaran hingga Kamis, 7 Mei 2026 pukul 20.00 WIB.</p>
+                    <p class="text-slate-700 font-medium text-sm leading-relaxed">Batas akhir pendaftaran hingga Rabu, 6 Mei 2026 pukul 20.00 WIB.</p>
                     <h2 class="text-2xl md:text-3xl font-black text-slate-900 uppercase tracking-tight">Pendaftaran O2SN Ditutup</h2>
                     <p class="text-slate-500 text-sm leading-relaxed font-medium">Masa pendaftaran atlet O2SN Sukaresmi 2026 telah berakhir. Silakan hubungi koordinator olahraga kecamatan untuk informasi verifikasi data.</p>
                     <button onclick="switchTab('beranda')" class="inline-block bg-slate-900 text-white px-8 py-3 rounded font-bold text-xs uppercase tracking-widest shadow-lg hover:bg-black active:scale-95 transition-all">Kembali ke Beranda</button>
@@ -410,26 +410,27 @@
                 <input type="text" id="inputRevisionToken" class="w-full px-4 py-4 rounded border border-slate-300 outline-none focus:border-sky-500 text-center font-black tracking-[0.5em] text-xl uppercase bg-slate-50" placeholder="------" maxlength="6">
             </div>
             
-            <div class="space-y-3">
+            <div class="grid grid-cols-1 gap-3">
                 <button onclick="verifyTokenAndProceed()" class="w-full py-3.5 bg-slate-900 text-white rounded font-bold text-xs uppercase tracking-widest hover:bg-black active:scale-95 transition-all shadow-md">Buka Akses Revisi</button>
-                <button onclick="requestTokenWA()" class="w-full py-3 border border-sky-100 text-sky-600 rounded font-bold text-[10px] uppercase tracking-widest hover:bg-sky-50 transition-all flex items-center justify-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884 0 2.225.584 3.911 1.706 5.659l-.999 3.65 3.782-.992zm11.489-6.812c-.287-.143-1.697-.838-1.959-.933-.262-.094-.452-.143-.642.143-.19.286-.738.933-.905 1.124-.167.19-.333.214-.62.071-.285-.143-1.206-.444-2.297-1.415-.849-.758-1.421-1.693-1.588-1.979-.166-.285-.018-.439.125-.581.128-.128.286-.333.429-.5.143-.166.19-.285.286-.476.095-.19.048-.357-.024-.5-.071-.143-.642-1.547-.88-2.118-.232-.556-.467-.48-.642-.489-.166-.008-.357-.01-.548-.01s-.5.071-.762.357c-.262.286-1.001.977-1.001 2.381s1.025 2.761 1.167 2.952c.143.19 2.016 3.079 4.883 4.319.682.295 1.214.471 1.629.603.685.217 1.307.187 1.8.114.549-.081 1.697-.693 1.935-1.362.238-.669.238-1.24.167-1.359-.071-.119-.262-.19-.548-.333z"/></svg>
-                    Minta Kode Token
-                </button>
-                <button onclick="document.getElementById('tokenModal').classList.add('hidden')" class="w-full py-2.5 text-slate-400 font-bold text-[9px] uppercase tracking-widest hover:text-rose-500 transition-all">Batal</button>
+                
+                <div class="grid grid-cols-1 gap-2" id="tokenActionButtons">
+                    <!-- Buttons will be injected via Script to include SVG -->
+                </div>
+                
+                <button onclick="document.getElementById('tokenModal').classList.add('hidden')" class="w-full py-2 text-slate-400 font-bold text-[9px] uppercase tracking-widest hover:text-rose-500 transition-all">Batal</button>
             </div>
         </div>
     </div>
 
     <script>
-        const DEADLINE_DATE = new Date("2026-05-07T20:00:00");
-        const ADMIN_WA = "087773949015";
+        const DEADLINE_DATE = new Date("2026-05-06T20:00:00");
+        const ADMIN_WA = "6287773949015";
         let currentStep = 1;
         let selectedLomba = [];
         let isRevisionMode = false;
         let editingDocId = null; 
         let tempFormData = {};
-        let pendingRevisionData = null; // Store school data waiting for token verification
+        let pendingRevisionData = null;
         window.submissions = [];
         
         let schoolSortKey = 'timestamp_raw'; 
@@ -447,13 +448,14 @@
             "SDN PASIRKADU 3", "SDN WERU 1", "SDN CIBUNGUR 1"
         ].sort();
 
-        // Konfigurasi Cabor
         const LOMBA_MAP = {
             kids_athletics: { name: "Kids Athletics", count: 2, sublabels: ["Atlet Putra", "Atlet Putri"], minRequired: 1 },
             renang: { name: "Renang", count: 2, sublabels: ["Atlet Putra", "Atlet Putri"], minRequired: 1 },
             bulutangkis: { name: "Bulutangkis", count: 2, sublabels: ["Atlet Putra", "Atlet Putri"], minRequired: 1 },
             bola_voli: { name: "Bola Voli Mini Putri", count: 6, sublabels: ["Inti 1", "Inti 2", "Inti 3", "Inti 4", "Cadangan 1", "Cadangan 2"], minRequired: 4 }
         };
+
+        const WA_SVG_ICON = `<svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884 0 2.225.584 3.911 1.706 5.659l-.999 3.65 3.782-.992zm11.489-6.812c-.287-.143-1.697-.838-1.959-.933-.262-.094-.452-.143-.642.143-.19.286-.738.933-.905 1.124-.167.19-.333.214-.62.071-.285-.143-1.206-.444-2.297-1.415-.849-.758-1.421-1.693-1.588-1.979-.166-.285-.018-.439.125-.581.128-.128.286-.333.429-.5.143-.166.19-.285.286-.476.095-.19.048-.357-.024-.5-.071-.143-.642-1.547-.88-2.118-.232-.556-.467-.48-.642-.489-.166-.008-.357-.01-.548-.01s-.5.071-.762.357c-.262.286-1.001.977-1.001 2.381s1.025 2.761 1.167 2.952c.143.19 2.016 3.079 4.883 4.319.682.295 1.214.471 1.629.603.685.217 1.307.187 1.8.114.549-.081 1.697-.693 1.935-1.362.238-.669.238-1.24.167-1.359-.071-.119-.262-.19-.548-.333z"/></svg>`;
 
         function generateToken() {
             const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -489,6 +491,14 @@
                 </label>
             `).join('');
 
+            // Inject SVG WhatsApp into modal buttons
+            document.getElementById('tokenActionButtons').innerHTML = `
+                <button onclick="requestTokenWA('Permohonan')" class="py-2.5 border border-sky-100 text-sky-600 rounded font-bold text-[9px] uppercase tracking-widest hover:bg-sky-50 transition-all flex flex-col items-center justify-center gap-1">
+                    <span class="bg-emerald-50 text-emerald-600 p-1 rounded-sm shadow-sm">${WA_SVG_ICON}</span>
+                    <span>Minta Kode Token</span>
+                </button>
+            `;
+
             updateDeadlineUI();
             setInterval(updateDeadlineUI, 1000);
         }
@@ -513,9 +523,9 @@
                 deadlineText.innerHTML = `
                     <div class="leading-none mb-1.5 opacity-80 font-bold uppercase tracking-widest text-[9px] md:text-[10px]">PENDAFTARAN DITUTUP DALAM:</div>
                     <div class="leading-none text-[16px] md:text-[22px] font-black text-sky-700 tracking-tighter">
-                        ${days} <span class="text-[10px] md:text-[12px] opacity-60 mr-1.5">HARI</span> 
-                        ${hours} <span class="text-[10px] md:text-[12px] opacity-60 mr-1.5">JAM</span> 
-                        ${minutes} <span class="text-[10px] md:text-[12px] opacity-60 mr-1.5">MENIT</span> 
+                        ${days} <span class="text-[10px] md:text-12px opacity-60 mr-1.5">HARI</span> 
+                        ${hours} <span class="text-[10px] md:text-12px opacity-60 mr-1.5">JAM</span> 
+                        ${minutes} <span class="text-[10px] md:text-12px opacity-60 mr-1.5">MENIT</span> 
                         ${seconds} <span class="text-[10px] md:text thin-12px opacity-60">DETIK</span>
                     </div>
                 `;
@@ -568,22 +578,22 @@
                 document.getElementById('tokenModal').classList.add('hidden');
                 showModal("AKSES DIBUKA", `Token valid. Data ${pendingRevisionData.nama_sekolah} siap untuk direvisi.`, "success");
             } else {
-                const customMsg = `Token O2SN tidak valid atau sudah kedaluwarsa. 
-
-Admin telah melakukan reset keamanan. 
-
-Silakan klik tombol di bawah untuk meminta kode token terbaru via WhatsApp.`;
-                showModal("TOKEN TIDAK VALID", customMsg, "error");
+                requestTokenWA('Tidak Valid', input);
             }
         }
 
-        window.requestTokenWA = function() {
+        window.requestTokenWA = function(type, inputToken = "") {
             const school = document.getElementById('tokenTargetSchool').innerText;
-            const message = `Yth. Admin O2SN, 
+            const inputElement = document.getElementById('inputRevisionToken');
+            const typedValue = inputElement ? inputElement.value.trim().toUpperCase() : "";
+            const tokenToUse = inputToken || typedValue || "------";
+            
+            let message = `Yth. \nAdmin O2SN, \n\nMohon dikirim Kode Token Revisi Data Pendaftaran *${school}*. \n\nTerima kasih.`;
+            
+            if (type !== 'Permohonan') {
+                message = `Yth. \nAdmin O2SN, \n\nKode token pendaftaran *${tokenToUse}* *${school}* tidak dapat digunakan. \n\nMohon kirimkan kode token terbaru. \n\nTerima kasih.`;
+            }
 
-Kode token pendaftaran ${school} tidak bisa digunakan. Mohon kirimkan kode token terbaru. 
-
-Terima kasih.`;
             const encoded = encodeURIComponent(message);
             window.open(`https://wa.me/${ADMIN_WA}?text=${encoded}`, '_blank');
         }
@@ -761,21 +771,22 @@ Terima kasih.`;
         }
 
         window.sendTokenWA = function(phone, school, token) {
-            const cleanPhone = phone.replace(/[^0-9]/g, '');
-            const finalPhone = cleanPhone.startsWith('0') ? '62' + cleanPhone.substring(1) : cleanPhone;
-            const message = `Halo Bapak/Ibu Pembimbing O2SN ${school},
+            const cleanPhone = getCleanWA(phone);
+            const message = `Yth. \nBapak/Ibu Pembimbing O2SN ${school}, \n\nBerikut adalah kode token pendaftaran sekolah Anda: \n*${token}*\n\nSilakan gunakan kode tersebut di menu revisi pada portal pendaftaran. \n\nTerima kasih.\n\n-------------- \n*Admin O2SN* \n--------------`;
+            window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`, '_blank');
+        }
 
-Berikut adalah KODE TOKEN REVISI untuk pendaftaran sekolah Anda:
-
-*${token}*
-
-Silakan gunakan kode tersebut di portal pendaftaran pada menu REVISI. Terima kasih.`;
-            window.open(`https://wa.me/${finalPhone}?text=${encodeURIComponent(message)}`, '_blank');
+        window.sendInfoWA = function(phone, school) {
+            const cleanPhone = getCleanWA(phone);
+            const message = `Yth. \nBapak/Ibu Pembimbing O2SN ${school}, \n\nKami sampaikan bahwa ... \n\nTerima kasih.\n\n-------------------\nAdmin O2SN\n-------------------`;
+            window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(message)}`, '_blank');
         }
 
         function getCleanWA(phone) {
             let clean = phone.replace(/[^0-9]/g, '');
-            if (clean.startsWith('0')) clean = '62' + clean.substring(1);
+            if (clean.startsWith('0')) {
+                clean = '62' + clean.substring(1);
+            }
             return clean;
         }
 
@@ -785,8 +796,9 @@ Silakan gunakan kode tersebut di portal pendaftaran pada menu REVISI. Terima kas
             const m = String(n.getMonth() + 1).padStart(2, '0');
             const d = String(n.getDate()).padStart(2, '0');
             const h = String(n.getHours()).padStart(2, '0');
+            const min = String(n.getMinutes()).padStart(2, '0');
             const s = String(n.getSeconds()).padStart(2, '0');
-            return `${y}${m}${d} ${h}.${s}`;
+            return `${y}${m}${d} ${h}.${min}.${s}`;
         }
 
         window.downloadAdminPDF = function(docId) {
@@ -906,18 +918,21 @@ Silakan gunakan kode tersebut di portal pendaftaran pada menu REVISI. Terima kas
                     <td class="px-4 py-3 uppercase text-[10px]">${r.tempat}</td>
                     <td class="px-4 py-3 text-[10px] font-bold text-slate-800">${r.tgl}</td>
                     <td class="px-4 py-3 text-center font-black">${r.kelas}</td>
-                    <td class="px-4 py-3">
-                        <div class="font-bold text-[10px] uppercase truncate max-w-[120px]" title="${r.guru}">${r.guru}</div>
-                        <a href="https://wa.me/${getCleanWA(r.wa)}" target="_blank" class="text-sky-500 hover:text-sky-700 text-[9px] font-black flex items-center gap-1 transition-colors">
-                            ${r.wa}
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-2 w-2" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.438 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884 0 2.225.584 3.911 1.706 5.659l-.999 3.65 3.782-.992zm11.489-6.812c-.287-.143-1.697-.838-1.959-.933-.262-.094-.452-.143-.642.143-.19.286-.738.933-.905 1.124-.167.19-.333.214-.62.071-.285-.143-1.206-.444-2.297-1.415-.849-.758-1.421-1.693-1.588-1.979-.166-.285-.018-.439.125-.581.128-.128.286-.333.429-.5.143-.166.19-.285.286-.476.095-.19.048-.357-.024-.5-.071-.143-.642-1.547-.88-2.118-.232-.556-.467-.48-.642-.489-.166-.008-.357-.01-.548-.01s-.5.071-.762.357c-.262.286-1.001.977-1.001 2.381s1.025 2.761 1.167 2.952c.143.19 2.016 3.079 4.883 4.319.682.295 1.214.471 1.629.603.685.217 1.307.187 1.8.114.549-.081 1.697-.693 1.935-1.362.238-.669.238-1.24.167-1.359-.071-.119-.262-.19-.548-.333z"/></svg>
-                        </a>
+                    <td class="px-4 py-3 leading-tight">
+                        <div class="flex flex-col">
+                            <div class="font-bold text-[10px] uppercase truncate max-w-[120px]" title="${r.guru}">${r.guru}</div>
+                            <button onclick="sendInfoWA('${r.wa}', '${r.nama_sekolah}')" class="text-sky-500 hover:text-sky-700 text-[9px] font-black flex items-center gap-1">
+                                <span class="bg-emerald-50 text-emerald-600 p-0.5 rounded-sm">${WA_SVG_ICON}</span> ${r.wa}
+                            </button>
+                        </div>
                     </td>
                     <td class="px-4 py-3 text-center">
-                        <div class="flex items-center justify-center gap-1">
+                        <div class="flex items-center justify-center gap-1.5 h-full">
                             <span class="font-black text-slate-900 text-[10px] tracking-widest">${r.revision_token}</span>
-                            <button onclick="copyToken('${r.revision_token}')" class="p-1 text-slate-300 hover:text-sky-600 transition-colors" title="Salin Token">📋</button>
-                            <button onclick="sendTokenWA('${r.wa}', '${r.nama_sekolah}', '${r.revision_token}')" class="p-1 text-slate-300 hover:text-emerald-600 transition-colors" title="Kirim via WA">💬</button>
+                            <div class="flex items-center gap-1">
+                                <button onclick="copyToken('${r.revision_token}')" class="p-1 text-slate-300 hover:text-sky-600 transition-colors" title="Salin Token">📋</button>
+                                <button onclick="sendTokenWA('${r.wa}', '${r.nama_sekolah}', '${r.revision_token}')" class="p-1 text-emerald-500 hover:text-emerald-700 transition-colors" title="Kirim via WA">${WA_SVG_ICON}</button>
+                            </div>
                         </div>
                     </td>
                     <td class="px-4 py-3 text-center">
@@ -942,27 +957,51 @@ Silakan gunakan kode tersebut di portal pendaftaran pada menu REVISI. Terima kas
 
         window.exportToExcel = function() {
             if (!window.submissions || window.submissions.length === 0) { showModal("DATA KOSONG", "Tidak ada data atlet untuk diunduh.", "error"); return; }
+            
             const wb = XLSX.utils.book_new();
+            
+            // 1. Sheet Keseluruhan
             const overallData = [];
             window.submissions.forEach(sub => {
                 Object.keys(LOMBA_MAP).forEach(key => {
-                    if (sub[`${key}_nama_1`] || sub[`${key}_nama_2`] || sub[`${key}_nama_3`] || sub[`${key}_nama_4` ]) {
-                        for(let i=1; i<=LOMBA_MAP[key].count; i++) {
-                            const pName = sub[`${key}_nama_${i}`];
-                            if (!pName) continue;
-                            overallData.push({
-                                "Waktu": sub.waktu_simpan, "Sekolah": sub.nama_sekolah, "Cabor": LOMBA_MAP[key].name,
-                                "Nama Atlet": pName || '', "NISN": sub[`${key}_nisn_${i}`] || '',
-                                "JK": sub[`${key}_jk_${i}`] || '', "Tempat": sub[`${key}_tempat_${i}`] || '',
-                                "Tgl": sub[`${key}_tgl_${i}`] || '', "Kelas": sub[`${key}_kelas_${i}`] || '',
-                                "Pelatih": sub[`${key}_guru_nama`] || '', "WA": sub[`${key}_guru_wa`] || '',
-                                "Token": sub.revision_token || ''
-                            });
-                        }
+                    for(let i=1; i<=LOMBA_MAP[key].count; i++) {
+                        const pName = sub[`${key}_nama_${i}`];
+                        if (!pName) continue;
+                        overallData.push({
+                            "Waktu": sub.waktu_simpan, "Sekolah": sub.nama_sekolah, "Cabor": LOMBA_MAP[key].name,
+                            "Nama Atlet": pName || '', "NISN": sub[`${key}_nisn_${i}`] || '',
+                            "JK": sub[`${key}_jk_${i}`] || '', "Tempat": sub[`${key}_tempat_${i}`] || '',
+                            "Tgl": sub[`${key}_tgl_${i}`] || '', "Kelas": sub[`${key}_kelas_${i}`] || '',
+                            "Pelatih": sub[`${key}_guru_nama`] || '', "WA": sub[`${key}_guru_wa`] || '',
+                            "Token": sub.revision_token || ''
+                        });
                     }
                 });
             });
             XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(overallData), "ATLET KESELURUHAN");
+            
+            // 2. Sheet per Cabang Olahraga
+            Object.keys(LOMBA_MAP).forEach(key => {
+                const branchData = [];
+                window.submissions.forEach(sub => {
+                    for(let i=1; i<=LOMBA_MAP[key].count; i++) {
+                        const pName = sub[`${key}_nama_${i}`];
+                        if (!pName) continue;
+                        branchData.push({
+                            "Waktu": sub.waktu_simpan, "Sekolah": sub.nama_sekolah,
+                            "Nama Atlet": pName || '', "NISN": sub[`${key}_nisn_${i}`] || '',
+                            "JK": sub[`${key}_jk_${i}`] || '', "Tempat": sub[`${key}_tempat_${i}`] || '',
+                            "Tgl": sub[`${key}_tgl_${i}`] || '', "Kelas": sub[`${key}_kelas_${i}`] || '',
+                            "Pelatih": sub[`${key}_guru_nama`] || '', "WA": sub[`${key}_guru_wa`] || ''
+                        });
+                    }
+                });
+                if (branchData.length > 0) {
+                    const sheetName = LOMBA_MAP[key].name.substring(0, 31);
+                    XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(branchData), sheetName);
+                }
+            });
+
             const ts = getFileTimestamp();
             XLSX.writeFile(wb, `Edi Brata Data Pendaftaran O2SN ${ts}.xlsx`);
         }
@@ -1120,15 +1159,30 @@ Silakan gunakan kode tersebut di portal pendaftaran pada menu REVISI. Terima kas
             doc.text("IDENTITAS PENDAFTAR", 20, 42);
             
             doc.setFontSize(10);
-            doc.text(`Nama Sekolah    : ${schoolName}`, 20, 50);
-            doc.text(`Waktu Simpan    : ${data.waktu_simpan}`, 20, 56);
-            doc.text(`ID Registrasi   : ${regId}`, 20, 62);
+            const labelX = 20;
+            const colonX = 55;
+            const valueX = 58;
+
+            doc.text("Nama Sekolah", labelX, 50);
+            doc.text(":", colonX, 50);
+            doc.text(schoolName, valueX, 50);
+
+            doc.text("Waktu Simpan", labelX, 56);
+            doc.text(":", colonX, 56);
+            doc.text(data.waktu_simpan, valueX, 56);
+
+            doc.text("ID Registrasi", labelX, 62);
+            doc.text(":", colonX, 62);
+            doc.text(regId, valueX, 62);
             
             doc.setFont("helvetica", "bold");
-            doc.text(`TOKEN REVISI    : ${revToken}`, 20, 68);
+            doc.text("TOKEN REVISI", labelX, 68);
+            doc.text(":", colonX, 68);
+            doc.text(revToken, valueX, 68);
+
             doc.setFont("helvetica", "normal");
             doc.setFontSize(8);
-            doc.text(`*Simpan token ini untuk melakukan revisi data di kemudian hari.`, 20, 72);
+            doc.text(`*Simpan token ini untuk melakukan revisi data di kemudian hari.`, labelX, 73);
             
             const tableRows = [];
             Object.keys(LOMBA_MAP).forEach(key => {
@@ -1158,10 +1212,22 @@ Silakan gunakan kode tersebut di portal pendaftaran pada menu REVISI. Terima kas
                 styles: { fontSize: 8, cellPadding: 3 }
             });
             
-            const finalY = doc.lastAutoTable.finalY + 20;
-            doc.setFontSize(9);
-            doc.setFont("helvetica", "italic");
-            doc.text(`Dokumen ini adalah bukti sah pendaftaran atlet O2SN Sukaresmi 2026.`, 105, finalY, { align: "center" });
+            const finalY = doc.lastAutoTable.finalY + 15;
+            const now = new Date();
+            const y = now.getFullYear();
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const d = String(now.getDate()).padStart(2, '0');
+            const h = String(now.getHours()).padStart(2, '0');
+            const min = String(now.getMinutes()).padStart(2, '0');
+            const s = String(now.getSeconds()).padStart(2, '0');
+            
+            doc.setFontSize(8);
+            doc.setFont("helvetica", "normal");
+            doc.text(`Dicetak pada ${y}${m}${d} ${h}.${min}.${s}`, 105, finalY, { align: "center" });
+            
+            doc.setFontSize(11);
+            doc.setFont("helvetica", "bold");
+            doc.text(`Dokumen ini adalah bukti sah pendaftaran atlet O2SN Sukaresmi 2026.`, 105, finalY + 8, { align: "center" });
             
             const ts = getFileTimestamp();
             const prefix = isRevision ? "Edi Brata Bukti Revisi Pendaftaran O2SN" : "Edi Brata Bukti Pendaftaran O2SN";
@@ -1260,7 +1326,7 @@ Silakan gunakan kode tersebut di portal pendaftaran pada menu REVISI. Terima kas
             let html = '<div class="absolute top-1/2 left-0 w-full h-0.5 bg-slate-200 -z-0"></div><div class="absolute top-1/2 left-0 h-0.5 bg-sky-600 transition-all duration-300 -z-0" style="width: '+ ((currentStep - 1) / (total - 1 || 1)) * 100 +'%"></div>';
             for (let i = 1; i <= total; i++) {
                 let cls = i < currentStep ? "bg-emerald-500 text-white border-emerald-500 shadow-sm" : (i === currentStep ? "gradient-bg text-white border-sky-600 scale-110 shadow-md" : "bg-white text-slate-300 border border-slate-200 shadow-sm");
-                html += `<div class=\"w-8 h-8 rounded flex items-center justify-center z-10 font-bold text-[10px] md:text-xs transition-all duration-300 ${cls}\">${i}</div>`;
+                html += `<div class="w-8 h-8 rounded flex items-center justify-center z-10 font-bold text-[10px] md:text-xs transition-all duration-300 ${cls}">${i}</div>`;
             }
             dots.innerHTML = html;
         }
